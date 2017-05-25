@@ -36,24 +36,17 @@ class TestJob implements ShouldQueue
         $clientCount = $this->getClientCount();
         echo("There are $clientCount connected clients\n");
 
-        try {
-            $this->callRedis();
-        } catch (\Exception $e) {
-            echo("Caught exceptions: " . $e->getMessage() . "\n");
-            $this->release();
+        Bugsnag::registerCallback(function ($report) {
+            $report->setMetaData([
+                'Data' => [
+                    'Very Fake',
+                    'Data Lives',
+                    'Here!'
+                ]
+            ]);
+        });
 
-            Bugsnag::registerCallback(function ($report) {
-                $report->setMetaData([
-                    'Data' => [
-                        'Very Fake',
-                        'Data Lives',
-                        'Here!'
-                    ]
-                ]);
-            });
-
-            throw $e;
-        }
+        $this->callRedis();
     }
 
     protected function getClientCount()

@@ -41,7 +41,7 @@ class DispatchJobs extends Command
      */
     public function handle()
     {
-        $job = (new TestJob())->onQueue('queue');
+        $job = new TestJob();
 
         $this->dispatch($job);
         $this->dispatch($job);
