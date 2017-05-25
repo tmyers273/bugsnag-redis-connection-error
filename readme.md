@@ -14,8 +14,8 @@ Create some test jobs with
 `php artisan dispatch:jobs`
 
 Run a worker with  
-`php artisan queue:work --queue=queue`
+`php artisan queue:work`
 
 Watch the connection count climb.
 
-Now comment out the bugsnag related code (lines 45-53 in App\Jobs\TestJob) and watch the client count remain the same
+Now comment out the bugsnag related code (lines 39-47 in App\Jobs\TestJob) and watch the client count remain the same
